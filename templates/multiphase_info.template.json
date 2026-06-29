@@ -1,0 +1,228 @@
+{
+  "schema_version": "0.1.0",
+  "dataset_type": "multiphase_flow",
+  "global": {
+    "dataset_id": "owner/dataset-name",
+    "title": "Dataset title",
+    "version": "1.0.0",
+    "description": "One paragraph summary of the dataset.",
+    "contributors": [
+      {
+        "name": "Contributor Name",
+        "affiliation": "Institution",
+        "orcid": "",
+        "email": ""
+      }
+    ],
+    "license": {
+      "data": "CC BY 4.0",
+      "code": "MIT",
+      "notes": ""
+    },
+    "citation": {
+      "doi": "",
+      "preferred_citation": "",
+      "related_papers": []
+    },
+    "access": {
+      "landing_page": "",
+      "download_url": "",
+      "repository_url": "",
+      "checksums_file": "checksums.sha256"
+    },
+    "physics": {
+      "flow_regime": "two_phase_flow",
+      "configuration": "droplet/bubble/spray/film/channel/periodic_box/etc.",
+      "phases": [
+        {
+          "name": "liquid",
+          "role": "dispersed_or_continuous",
+          "density": {
+            "value": null,
+            "units": "kg m-3"
+          },
+          "dynamic_viscosity": {
+            "value": null,
+            "units": "Pa s"
+          }
+        },
+        {
+          "name": "gas",
+          "role": "dispersed_or_continuous",
+          "density": {
+            "value": null,
+            "units": "kg m-3"
+          },
+          "dynamic_viscosity": {
+            "value": null,
+            "units": "Pa s"
+          }
+        }
+      ],
+      "surface_tension": {
+        "value": null,
+        "units": "N m-1"
+      },
+      "gravity": {
+        "value": [0.0, 0.0, 0.0],
+        "units": "m s-2"
+      },
+      "dimensionless_numbers": {
+        "Re": null,
+        "We": null,
+        "Ca": null,
+        "Fr": null,
+        "Bo": null,
+        "Oh": null,
+        "At": null
+      },
+      "boundary_conditions": "Describe all boundaries.",
+      "initial_conditions": "Describe initial interface and velocity fields."
+    },
+    "method": {
+      "source_type": "simulation",
+      "solver_or_instrument": "NGA2/OpenFOAM/Basilisk/experiment/etc.",
+      "interface_representation": "VOF",
+      "governing_equations": "incompressible Navier-Stokes with surface tension",
+      "numerical_method": {
+        "spatial_discretization": "",
+        "temporal_discretization": "",
+        "pressure_velocity_coupling": "",
+        "interface_advection": "",
+        "surface_tension_model": ""
+      },
+      "experimental_method": {
+        "diagnostic": "",
+        "spatial_resolution": "",
+        "temporal_resolution": "",
+        "uncertainty": ""
+      }
+    },
+    "grid": {
+      "spatial_dimension": 3,
+      "grid_type": "uniform_structured",
+      "shape": [256, 256, 256],
+      "domain_size": {
+        "value": [1.0, 1.0, 1.0],
+        "units": "m"
+      },
+      "coordinate_order": "[i,j,k]",
+      "storage_order": "row_major_or_fortran_order",
+      "cell_location": "cell_centered",
+      "coordinates": {
+        "x": "grid/x.dat",
+        "y": "grid/y.dat",
+        "z": "grid/z.dat"
+      }
+    },
+    "variables": [
+      {
+        "name": "alpha",
+        "standard_name": "phase_indicator",
+        "required_level": "core",
+        "description": "Volume fraction or phase indicator. Convention: alpha=1 for liquid, alpha=0 for gas.",
+        "units": "1",
+        "shape": ["nx", "ny", "nz"],
+        "dtype": "float32",
+        "location": "cell_centered",
+        "valid_range": [0.0, 1.0]
+      },
+      {
+        "name": "u",
+        "standard_name": "velocity_x",
+        "required_level": "core_for_flow_field",
+        "units": "m s-1",
+        "shape": ["nx", "ny", "nz"],
+        "dtype": "float32",
+        "location": "cell_centered"
+      },
+      {
+        "name": "v",
+        "standard_name": "velocity_y",
+        "required_level": "core_for_flow_field",
+        "units": "m s-1",
+        "shape": ["nx", "ny", "nz"],
+        "dtype": "float32",
+        "location": "cell_centered"
+      },
+      {
+        "name": "w",
+        "standard_name": "velocity_z",
+        "required_level": "core_for_3d_flow_field",
+        "units": "m s-1",
+        "shape": ["nx", "ny", "nz"],
+        "dtype": "float32",
+        "location": "cell_centered"
+      },
+      {
+        "name": "p",
+        "standard_name": "pressure",
+        "required_level": "core_for_flow_field",
+        "units": "Pa",
+        "shape": ["nx", "ny", "nz"],
+        "dtype": "float32",
+        "location": "cell_centered"
+      },
+      {
+        "name": "rho",
+        "standard_name": "mixture_density",
+        "required_level": "recommended",
+        "units": "kg m-3",
+        "shape": ["nx", "ny", "nz"],
+        "dtype": "float32",
+        "location": "cell_centered"
+      },
+      {
+        "name": "mu",
+        "standard_name": "mixture_dynamic_viscosity",
+        "required_level": "recommended",
+        "units": "Pa s",
+        "shape": ["nx", "ny", "nz"],
+        "dtype": "float32",
+        "location": "cell_centered"
+      },
+      {
+        "name": "kappa",
+        "standard_name": "interface_curvature",
+        "required_level": "recommended_for_interface_learning",
+        "units": "m-1",
+        "shape": ["nx", "ny", "nz"],
+        "dtype": "float32",
+        "location": "cell_centered"
+      }
+    ],
+    "ai_metadata": {
+      "tasks": ["super_resolution", "closure_modeling", "interface_reconstruction"],
+      "split_policy": "case-level split",
+      "train_cases": [],
+      "validation_cases": [],
+      "test_cases": [],
+      "baseline_methods": [],
+      "metrics": []
+    },
+    "known_limitations": []
+  },
+  "local": [
+    {
+      "id": 0,
+      "case_id": "case_0000",
+      "snapshot_id": 0,
+      "time": {
+        "value": 0.0,
+        "units": "s"
+      },
+      "files": {
+        "alpha": "data/case_0000/alpha_000000.dat",
+        "u": "data/case_0000/u_000000.dat",
+        "v": "data/case_0000/v_000000.dat",
+        "w": "data/case_0000/w_000000.dat",
+        "p": "data/case_0000/p_000000.dat"
+      },
+      "case_parameters": {
+        "Re": null,
+        "We": null,
+        "notes": ""
+      }
+    }
+  ]
+}

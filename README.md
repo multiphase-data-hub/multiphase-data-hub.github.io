@@ -51,6 +51,8 @@ multiphase-data-hub/
   templates/
     dataset_info.schema.json
     dataset_info.template.json
+    multiphase_info.schema.json
+    multiphase_info.template.json
   examples/
     load_random_vof_patches.py
 ```
