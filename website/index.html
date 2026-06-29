@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Open catalogue for multiphase-flow datasets for AI, CFD, and experimental research."
+    />
+    <title>Multiphase Data Hub</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="index.html">Multiphase Data Hub</a>
+        <div class="nav-links">
+          <a href="index.html#datasets">Datasets</a>
+          <a href="standard.html">Standard</a>
+          <a href="contribute.html">Contribute</a>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Open data for AI + multiphase flow</p>
+          <h1>Reusable datasets for interface-resolved multiphase-flow research.</h1>
+          <p>
+            A community catalogue for simulation, experiment, and AI-ready
+            benchmark datasets covering droplets, bubbles, sprays, films,
+            breakup, coalescence, and interfacial transport.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#datasets">Browse datasets</a>
+            <a class="button secondary" href="contribute.html">Submit data</a>
+          </div>
+        </div>
+
+        <figure class="hero-visual">
+          <img src="assets/interface_preview.png" alt="Random multiphase interface preview" />
+          <figcaption>Seed VOF interface generated from randomized analytic geometry</figcaption>
+        </figure>
+      </section>
+    </header>
+
+    <main>
+      <section class="metrics-strip" aria-label="Project summary">
+        <div>
+          <strong id="dataset-count">1</strong>
+          <span>indexed datasets</span>
+        </div>
+        <div>
+          <strong>3D VOF</strong>
+          <span>first seed benchmark</span>
+        </div>
+        <div>
+          <strong>362k</strong>
+          <span>AI-ready patches</span>
+        </div>
+        <div>
+          <strong>Open</strong>
+          <span>metadata standard</span>
+        </div>
+      </section>
+
+      <section id="datasets" class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Catalogue</p>
+            <h2>Datasets</h2>
+          </div>
+          <label class="search">
+            <span>Search datasets</span>
+            <input
+              id="dataset-search"
+              type="search"
+              placeholder="VOF, droplet, DNS, super-resolution"
+            />
+          </label>
+        </div>
+        <div class="dataset-grid" id="dataset-grid"></div>
+      </section>
+
+      <section class="section split">
+        <div>
+          <p class="eyebrow">Why this exists</p>
+          <h2>Multiphase-flow AI needs shared data, not only shared models.</h2>
+          <p>
+            High-fidelity two-phase and multiphase-flow simulations are expensive,
+            experimental data are hard to standardize, and many AI papers rely on
+            private case-specific datasets. This site turns scattered datasets into
+            citable, searchable, and reusable research assets.
+          </p>
+          <a class="text-link" href="standard.html">Read the data standard</a>
+        </div>
+        <img
+          class="wide-figure"
+          src="assets/slice_compare_case_0100.png"
+          alt="Slice comparison for a VOF super-resolution seed dataset"
+        />
+      </section>
+
+      <section class="section band">
+        <p class="eyebrow">Submission model</p>
+        <h2>Keep the website light. Put large data on archival storage.</h2>
+        <div class="workflow">
+          <article>
+            <span>1</span>
+            <h3>Host</h3>
+            <p>Upload data to Zenodo, Hugging Face Datasets, Kaggle, Figshare, or institutional storage.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Describe</h3>
+            <p>Fill the metadata template with physics, numerics, variables, units, splits, license, and citation.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Review</h3>
+            <p>Submit a pull request. Maintainers check metadata completeness, link integrity, and license clarity.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Multiphase Data Hub</span>
+      <span>Community-maintained open dataset catalogue</span>
+    </footer>
+
+    <script src="datasets.js"></script>
+  </body>
+</html>

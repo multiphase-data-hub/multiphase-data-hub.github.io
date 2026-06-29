@@ -1,0 +1,92 @@
+{
+  "schema_version": "0.1.0",
+  "id": "random_interfaces_n256_to_n64_interface_patches_v2",
+  "title": "Random VOF Interface Patches: N256 to N64",
+  "version": "0.2.0-draft",
+  "status": "draft_seed_dataset",
+  "description": "AI-ready patch dataset derived from randomized analytic interfaces initialized as VOF fields in NGA2. Each sample pairs a high-resolution 16x16x16 VOF patch with a low-resolution 4x4x4 target/residual representation at scale factor 4.",
+  "domain": {
+    "field": "multiphase_flow",
+    "flow_type": "two_phase_flow",
+    "configuration": "periodic box with randomized analytic interfaces",
+    "phases": ["liquid", "gas"],
+    "interface_method": "VOF",
+    "solver_or_source": "NGA2",
+    "boundary_conditions": "periodic",
+    "spatial_dimension": 3
+  },
+  "ai_tasks": [
+    "super_resolution",
+    "closure_modeling",
+    "interface_reconstruction",
+    "VOF_degradation_modeling"
+  ],
+  "data": {
+    "public_access_url": "TBD",
+    "doi": "TBD",
+    "format": "npz",
+    "metadata_format": "json",
+    "num_samples": 362264,
+    "dtype": "float16",
+    "case_range": [1, 100],
+    "scale_factor": 4,
+    "arrays": [
+      {
+        "name": "x_hr",
+        "description": "high-resolution VOF patch",
+        "shape": [362264, 1, 16, 16, 16],
+        "units": "volume_fraction",
+        "value_range": [0.0, 1.0]
+      },
+      {
+        "name": "y_lr",
+        "description": "low-resolution VOF patch",
+        "shape": [362264, 1, 4, 4, 4],
+        "units": "volume_fraction",
+        "value_range": [0.0, 1.0]
+      }
+    ],
+    "baseline": "4x4x4 volume average of x_hr over each coarse cell",
+    "residual_definition": "y_lr - baseline_avgpool4",
+    "patch_boundary": "periodic wrap",
+    "axis_order": "Fortran-order EnSight payload reshaped as [i,j,k]"
+  },
+  "sampling": {
+    "strategy": "weighted by center residual, normalized N64 curvature magnitude, and mid-range VOF; greedy periodic spatial thinning",
+    "max_samples_per_case": 4000,
+    "min_center_distance": 2,
+    "vof_eps": 1e-8,
+    "random_seed": 20260612
+  },
+  "splits": {
+    "split_file": "random_interfaces_n256_to_n64_interface_patches_v2_splits.json",
+    "policy": "case-level split to avoid patch leakage across train/validation/test",
+    "train_cases": [1, 80],
+    "validation_cases": [81, 90],
+    "test_cases": [91, 100]
+  },
+  "quality_checks": {
+    "baseline_metrics_file": "random_interfaces_n256_to_n64_interface_patches_v2_baseline_metrics.csv",
+    "sampling_summary_file": "random_interfaces_n256_to_n64_interface_patches_v2_sampling_summary.csv",
+    "known_limitations": [
+      "Analytic random interfaces are not full transient Navier-Stokes realizations.",
+      "Material properties and dimensionless groups should be documented before public release.",
+      "License, DOI, and persistent storage URL are not assigned yet."
+    ]
+  },
+  "license": {
+    "data_license": "TBD",
+    "code_license": "TBD",
+    "usage_notes": "Choose an explicit public license before accepting external reuse."
+  },
+  "citation": {
+    "preferred_citation": "TBD",
+    "authors": ["TBD"],
+    "contact": "TBD"
+  },
+  "provenance": {
+    "created_from_workspace": "local research workspace/degradation_dataset_v2",
+    "source_metadata_file": "random_interfaces_n256_to_n64_interface_patches_v2_meta.json",
+    "source_root_on_cluster": "/home/public/NGA2/NGA2-main/examples/random_vof_init/results_random_interfaces"
+  }
+}

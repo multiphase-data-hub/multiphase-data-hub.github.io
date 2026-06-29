@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Data Standard | Multiphase Data Hub</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="index.html">Multiphase Data Hub</a>
+        <div class="nav-links">
+          <a href="index.html#datasets">Datasets</a>
+          <a href="standard.html">Standard</a>
+          <a href="contribute.html">Contribute</a>
+        </div>
+      </nav>
+      <div class="page-title">
+        <p class="eyebrow">Data standard</p>
+        <h1>Metadata that makes multiphase-flow data reusable.</h1>
+        <p>
+          Every dataset should describe the physics, numerics or experiment,
+          file structure, units, splits, provenance, license, and citation.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="standard-list">
+          <article>
+            <h3>Physics</h3>
+            <p>Flow configuration, phases, material properties, dimensionless groups, boundary conditions, and governing assumptions.</p>
+          </article>
+          <article>
+            <h3>Numerics</h3>
+            <p>Solver, discretization, grid, interface method, time stepping, convergence notes, and known limitations.</p>
+          </article>
+          <article>
+            <h3>Experiment</h3>
+            <p>Measurement method, calibration, uncertainty, camera or probe settings, acquisition rate, and post-processing.</p>
+          </article>
+          <article>
+            <h3>AI readiness</h3>
+            <p>Array names, shapes, units, coordinate order, splits, preprocessing, baselines, and evaluation metrics.</p>
+          </article>
+          <article>
+            <h3>Provenance</h3>
+            <p>Authors, institution, software version, generation scripts, hardware notes, release version, and checksums.</p>
+          </article>
+          <article>
+            <h3>Reuse terms</h3>
+            <p>License, citation, DOI or persistent URL, contact person, and restrictions for redistribution or commercial use.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section band">
+        <p class="eyebrow">Recommended formats</p>
+        <h2>Use common scientific formats with documented loaders.</h2>
+        <div class="detail-grid">
+          <article class="detail-card">
+            <h3>HDF5 / Zarr</h3>
+            <p>Best for large multidimensional fields and time-resolved data.</p>
+          </article>
+          <article class="detail-card">
+            <h3>NPZ</h3>
+            <p>Good for compact AI-ready tensors and small benchmarks.</p>
+          </article>
+          <article class="detail-card">
+            <h3>VTK / XDMF / EnSight</h3>
+            <p>Useful for CFD field outputs and visualization workflows.</p>
+          </article>
+          <article class="detail-card">
+            <h3>CSV / Parquet</h3>
+            <p>Appropriate for diagnostics, scalar metrics, and case summaries.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Multiphase Data Hub</span>
+      <span>Data standard</span>
+    </footer>
+  </body>
+</html>
