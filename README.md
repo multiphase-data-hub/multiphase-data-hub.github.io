@@ -52,6 +52,7 @@ multiphase-data-hub/
     data_standard.md
     governance.md
     kaggle_dataset_package_standard.md
+    kaggle_dataset_package_standard_zh.md
     launch_checklist.md
     roadmap.md
   templates/
