@@ -36,6 +36,12 @@ A submitted dataset should have:
 - at least one contact person;
 - enough documentation for an external user to load a sample.
 
+For Kaggle-hosted multiphase-flow datasets, follow
+`docs/kaggle_dataset_package_standard.md`. The required core files are
+`dataset-metadata.json`, `info.json`, and the data files. `load_example.py` is
+mandatory for custom or solver-specific binary files and strongly recommended
+for all datasets.
+
 ## Review Categories
 
 Dataset records can be marked as:
@@ -45,4 +51,3 @@ Dataset records can be marked as:
 - `community`: external community contribution;
 - `benchmark`: curated dataset with fixed splits and metrics;
 - `archived`: retained for citation but not actively maintained.
-

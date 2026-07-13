@@ -129,6 +129,9 @@ units, shapes, locations, and conventions. Fixed physical settings belong in
 `global.physics.physical_parameters` or `local.case_parameters`, while the
 `local` section maps each case or snapshot to actual field files.
 
+For Kaggle packages, see `docs/kaggle_dataset_package_standard.md` for the
+required package files and accepted data-format classes.
+
 ## Recommended File Layout
 
 ```text
