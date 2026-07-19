@@ -33,66 +33,139 @@
     <main>
       <section class="section">
         <p class="eyebrow">Core Principle</p>
-        <h2>Do not force one file format. Force clear meaning.</h2>
+        <h2>Do not force one file format. Require clear meaning.</h2>
         <p class="section-copy">
-          Multiphase-flow datasets may come from EnSight, VTK, HDF5, Zarr,
-          NetCDF, NPZ, or solver-specific binary outputs. The required standard
-          is not a single storage format; it is a complete metadata record that
-          makes external reuse practical.
+          Multiphase-flow datasets may use HDF5, NPZ, VTK, EnSight, DAT files,
+          or solver-specific binary outputs. The catalogue does not require a
+          unified storage format, but every dataset must provide enough metadata
+          for an external user to understand the variables, reconstruct the
+          grid, load the files, and cite the source correctly.
         </p>
       </section>
 
       <section class="section band">
-        <p class="eyebrow">Complete CFD Flow Fields</p>
+        <p class="eyebrow">Minimum Record</p>
         <h2>Required information for simulation datasets</h2>
         <div class="standard-list">
           <article>
-            <h3>Flow Variables</h3>
-            <p>Velocity, pressure, and one interface or phase-indicator representation such as <code>alpha</code>, <code>Gvol</code>, <code>VOF</code>, or <code>phi</code>.</p>
+            <h3>Dataset Identity</h3>
+            <p>Title, short description, contributors, contact, version, public access link, license, and DOI or citation.</p>
           </article>
           <article>
-            <h3>Grid</h3>
-            <p>Dimensions, coordinate bounds, grid type, coordinate order, field location, and geometry files when the grid is not trivially uniform.</p>
+            <h3>Flow Fields</h3>
+            <p>Velocity, pressure, and one interface or phase-indicator variable, with names, units, shapes, dtype, and field location.</p>
           </article>
           <article>
-            <h3>Physics</h3>
-            <p>Phase convention, boundary conditions, initial conditions, material parameters, and relevant dimensionless numbers.</p>
+            <h3>Grid and Geometry</h3>
+            <p>Grid dimensions, physical extent, coordinate order, cell- or node-centered storage, and grid files when needed.</p>
           </article>
           <article>
-            <h3>Provenance</h3>
-            <p>Solver or instrument, generation method, contributors, citation, license, and known limitations.</p>
+            <h3>Physics and Numerics</h3>
+            <p>Configuration, phase convention, boundary conditions, initial conditions, solver or method, material parameters, and dimensionless numbers.</p>
           </article>
         </div>
       </section>
 
       <section class="section">
-        <p class="eyebrow">Fixed Parameters</p>
-        <h2>Material properties belong in metadata unless they vary as fields.</h2>
+        <p class="eyebrow">Variables</p>
+        <h2>Complete CFD flow-field data should include three core roles.</h2>
         <p class="section-copy">
-          Density, viscosity, surface tension, gravity, Reynolds number, Weber
-          number, and related case settings should usually be stored in
-          <code>info.json</code>, not as field variables. Store them as variables
-          only when they genuinely vary in space or time.
+          For two-phase and multiphase CFD datasets, the minimum recommended
+          fields are velocity, pressure, and an interface representation. Common
+          names include <code>U</code>, <code>V</code>, <code>velocity</code>,
+          <code>u</code>/<code>v</code>/<code>w</code> for velocity;
+          <code>P</code>, <code>p</code>, or <code>pressure</code> for pressure;
+          and <code>alpha</code>, <code>Gvol</code>, <code>VOF</code>, or
+          <code>phi</code> for the interface. The phase convention must be
+          stated, for example <code>alpha = 1</code> for liquid and
+          <code>alpha = 0</code> for gas.
         </p>
       </section>
 
       <section class="section band">
-        <p class="eyebrow">Metadata Layout</p>
-        <h2>Use global and local sections.</h2>
+        <p class="eyebrow">Parameters and Grid</p>
+        <h2>Store case settings in metadata unless they vary as fields.</h2>
+        <div class="detail-grid">
+          <article class="detail-card">
+            <h3>Fixed Parameters</h3>
+            <p>Density, viscosity, surface tension, gravity, Reynolds number, Weber number, Ohnesorge number, and similar settings should normally be written in <code>info.json</code>.</p>
+          </article>
+          <article class="detail-card">
+            <h3>Uniform Grids</h3>
+            <p>Separate coordinate files are not required if dimensions, physical bounds, spacing, coordinate order, and field location are fully specified.</p>
+          </article>
+          <article class="detail-card">
+            <h3>Complex Grids</h3>
+            <p>Non-uniform, curvilinear, moving, adaptive, or unstructured grids must include the corresponding grid, geometry, or coordinate files.</p>
+          </article>
+          <article class="detail-card">
+            <h3>Custom Binary Files</h3>
+            <p>Extensionless or solver-specific binary files must document header bytes, dtype, payload shape, component order, reshape order, and include a loading example.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="eyebrow">Metadata Template</p>
+        <h2>Use <code>info.json</code> with global and local sections.</h2>
+        <p class="section-copy">
+          The <code>global</code> section describes the dataset as a whole. The
+          <code>local</code> section maps each case, sample, or snapshot to its
+          time value and file paths. Time is recommended when available, but a
+          dataset with one or a few snapshots can still be useful if the physical
+          state and file organization are clear.
+        </p>
         <pre class="code-block"><code>{
+  "schema_version": "0.1.0",
+  "dataset_type": "multiphase_flow_simulation",
   "global": {
-    "title": "...",
-    "variables": [...],
-    "grid": {...},
-    "physics": {...},
-    "license": "...",
-    "citation": "..."
+    "dataset_id": "owner/dataset-slug",
+    "title": "Dataset title",
+    "description": "One paragraph dataset description.",
+    "format": "hdf5 | npz | vtk | custom binary | ...",
+    "snapshots": 1,
+    "variables": [
+      {
+        "name": "alpha",
+        "role": "phase_indicator",
+        "units": "1",
+        "shape": ["nx", "ny", "nz"],
+        "dtype": "float32",
+        "location": "cell_centered",
+        "convention": "alpha=1 liquid, alpha=0 gas"
+      }
+    ],
+    "grid": {
+      "type": "uniform_cartesian",
+      "cell_dims": [256, 256, 256],
+      "domain_bounds_xyz": [[0, 1], [0, 1], [0, 1]],
+      "coordinate_order": "x, y, z",
+      "field_location": "cell_centered"
+    },
+    "physics": {
+      "flow_type": "two_phase_flow",
+      "configuration": "droplet breakup in HIT",
+      "physical_parameters": {},
+      "dimensionless_numbers": {},
+      "boundary_conditions": "",
+      "initial_conditions": ""
+    },
+    "contributors": [],
+    "license": "CC BY 4.0",
+    "doi": "",
+    "known_limitations": []
   },
   "local": [
     {
       "snapshot_id": "000001",
-      "time": {"value": 0.0, "units": "..."},
-      "files": {"Gvol": "data/Gvol/Gvol.000001"}
+      "time": {"value": null, "units": ""},
+      "files": {
+        "alpha": "data/alpha/alpha.000001",
+        "u": "data/u/u.000001",
+        "v": "data/v/v.000001",
+        "w": "data/w/w.000001",
+        "p": "data/p/p.000001"
+      }
     }
   ]
 }</code></pre>

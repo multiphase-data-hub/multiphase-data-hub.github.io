@@ -35,51 +35,56 @@
         <div class="workflow">
           <article>
             <span>1</span>
-            <h3>Package</h3>
-            <p>Prepare data files, <code>README.md</code>, <code>info.json</code>, checksums, and a reader note or example script.</p>
+            <h3>Host the Data</h3>
+            <p>Upload the large files to ModelScope, Kaggle, Zenodo, or trusted institutional storage. Do not place large datasets in the website repository.</p>
           </article>
           <article>
             <span>2</span>
-            <h3>Host</h3>
-            <p>Upload to ModelScope for China-accessible distribution, Kaggle for international access, or Zenodo for DOI-backed release.</p>
+            <h3>Prepare Metadata</h3>
+            <p>Add <code>README.md</code>, <code>info.json</code>, a clear <code>data/</code> layout, and a reader script when the files are solver-specific binaries.</p>
           </article>
           <article>
             <span>3</span>
-            <h3>Submit</h3>
-            <p>Open a GitHub issue or pull request with the metadata record, preview figure, download link, license, and citation.</p>
+            <h3>Submit the Record</h3>
+            <p>Open a GitHub issue or pull request with the dataset title, description, preview image, landing page, license, citation, and key metadata.</p>
           </article>
         </div>
       </section>
 
       <section class="section band">
-        <p class="eyebrow">Acceptance Checklist</p>
-        <h2>Minimum bar for catalogue inclusion</h2>
+        <p class="eyebrow">Before Submission</p>
+        <h2>Minimum checklist for a new record</h2>
         <ul class="checklist">
           <li>Data are hosted outside this website repository.</li>
-          <li>Download or landing-page URL is public or clearly access-controlled.</li>
-          <li>License and citation are explicit.</li>
-          <li>Variables, units, shapes, and field locations are documented.</li>
-          <li>Grid, coordinates, boundary conditions, and phase convention are described.</li>
-          <li>Solver-specific binary files include header, dtype, payload shape, and reading instructions.</li>
-          <li>At least one representative image or preview figure is provided.</li>
+          <li>The landing page or download link is public, or access restrictions are stated clearly.</li>
+          <li>The dataset includes <code>README.md</code>, <code>info.json</code>, and data files under a documented structure.</li>
+          <li>Variables, units, shapes, dtype, field locations, and interface convention are documented.</li>
+          <li>Grid dimensions, physical extent, coordinate order, and boundary conditions are described.</li>
+          <li>Custom binary files include header size, dtype, payload shape, component order, reshape order, and <code>load_example.py</code>.</li>
+          <li>License, contributors, contact, and DOI or preferred citation are explicit.</li>
+          <li>At least one representative preview image is provided for the catalogue page.</li>
         </ul>
       </section>
 
       <section class="section">
-        <p class="eyebrow">Submission Metadata</p>
-        <h2>Start from the project templates.</h2>
+        <p class="eyebrow">What to Send</p>
+        <h2>The catalogue record should be short and verifiable.</h2>
         <div class="detail-grid">
           <article class="detail-card">
-            <h3>Dataset Record</h3>
-            <p><a class="text-link" href="../templates/dataset_info.template.json">dataset_info.template.json</a> describes the catalogue-level record used by the website.</p>
+            <h3>Dataset Page Fields</h3>
+            <p>Send the title, one-paragraph description, Quick Info fields, contributors, DOI, data size, access link, and a preview image.</p>
           </article>
           <article class="detail-card">
-            <h3>Simulation Metadata</h3>
-            <p><a class="text-link" href="../templates/multiphase_info.template.json">multiphase_info.template.json</a> describes the simulation package using global and local metadata.</p>
+            <h3>Metadata File</h3>
+            <p>Follow the <a class="text-link" href="standard.html">data standard</a> and include <code>info.json</code> in the hosted dataset package.</p>
           </article>
           <article class="detail-card">
-            <h3>Hosting Guide</h3>
-            <p><a class="text-link" href="hosting.html">Read the hosting guide</a> for ModelScope, Kaggle, and Zenodo platform choices.</p>
+            <h3>Submission Channel</h3>
+            <p>Use a GitHub issue for a simple request. Use a pull request if you can add the dataset page, metadata file, and image yourself.</p>
+          </article>
+          <article class="detail-card">
+            <h3>Maintainer Review</h3>
+            <p>Review focuses on accessibility, metadata completeness, file readability, license clarity, and citation. It is not a scientific peer review of the paper.</p>
           </article>
         </div>
       </section>

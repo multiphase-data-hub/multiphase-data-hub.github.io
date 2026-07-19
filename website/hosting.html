@@ -31,14 +31,16 @@
 
     <main>
       <section class="section">
+        <p class="eyebrow">Platform Choice</p>
+        <h2>Choose a host according to access, audience, and citation needs.</h2>
         <div class="standard-list">
           <article>
             <h3>ModelScope</h3>
-            <p>Recommended for China-accessible public distribution. Use Git and Git LFS for large binary data, and include <code>README.md</code>, <code>info.json</code>, and a clear <code>data/</code> layout.</p>
+            <p>Recommended for China-accessible public distribution. Use Git and Git LFS for large binary data, and keep the repository readable with <code>README.md</code>, <code>info.json</code>, and a documented <code>data/</code> directory.</p>
           </article>
           <article>
             <h3>Kaggle</h3>
-            <p>Recommended for international AI and data-science users. Include <code>dataset-metadata.json</code>, <code>info.json</code>, and documented data files. CLI upload from clusters may require network configuration.</p>
+            <p>Recommended for international AI and data-science users. Include Kaggle's <code>dataset-metadata.json</code>, project <code>info.json</code>, and documented data files. Cluster CLI upload may require proxy configuration.</p>
           </article>
           <article>
             <h3>Zenodo</h3>
@@ -58,6 +60,25 @@ load_example.py  # required for solver-specific binary formats</code></pre>
       </section>
 
       <section class="section">
+        <p class="eyebrow">Short Upload Guide</p>
+        <h2>Keep platform-specific files separate from scientific metadata.</h2>
+        <div class="detail-grid">
+          <article class="detail-card">
+            <h3>Kaggle Package</h3>
+            <p>Use <code>kaggle datasets init</code> to create <code>dataset-metadata.json</code>. The dataset id must match the Kaggle username and slug. The scientific metadata still belongs in <code>info.json</code>.</p>
+          </article>
+          <article class="detail-card">
+            <h3>ModelScope Package</h3>
+            <p>Create a dataset repository on ModelScope, clone it with Git, track large CFD files with Git LFS, then commit <code>README.md</code>, <code>info.json</code>, <code>data/</code>, and auxiliary scripts.</p>
+          </article>
+          <article class="detail-card">
+            <h3>Large Binary Data</h3>
+            <p>For raw binary fields such as <code>Gvol.000001</code>, <code>V.000001</code>, or <code>P.000001</code>, include a loading script and document the binary layout explicitly.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section band">
         <p class="eyebrow">Binary CFD Files</p>
         <h2>Custom or extensionless files need explicit reading metadata.</h2>
         <p class="section-copy">
