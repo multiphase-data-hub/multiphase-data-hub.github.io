@@ -7,7 +7,7 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
 
 permissions:
-  contents: read
+  contents: write
   issues: write
   pull-requests: write
 
@@ -61,22 +61,16 @@ jobs:
       - name: Validate dataset metadata
         run: python scripts/validate_dataset_metadata.py
 
-      - name: Check datasets.js freshness
+      - name: Auto-generate stale files
         run: |
           python scripts/generate_datasets_js.py
-          if ! git diff --exit-code website/datasets.js; then
-            echo "::error::website/datasets.js is stale. Run 'python scripts/generate_datasets_js.py' locally and commit the result."
-            echo "Stale datasets.js means the website will not show newly added datasets."
-            exit 1
-          fi
-
-      - name: Check dataset pages freshness
-        run: |
           python scripts/generate_dataset_pages.py
-          if ! git diff --exit-code website/dataset-*.html; then
-            echo "::error::Dataset detail pages are stale. Run 'python scripts/generate_dataset_pages.py' locally and commit the results."
-            exit 1
-          fi
+          if ! git diff --exit-code website/datasets.js website/dataset-*.html; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add website/datasets.js website/dataset-*.html
+            git commit -m "chore: auto-generate datasets.js and detail pages [skip ci]"
+            git push
           fi
 
   notify-reviewers:
