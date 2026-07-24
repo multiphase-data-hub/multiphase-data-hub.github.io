@@ -87,7 +87,7 @@ def main() -> int:
         except (json.JSONDecodeError, KeyError) as exc:
             print(f"Warning: skipping {path.name}: {exc}")
 
-    header = "// Auto-generated from datasets/*.json â€?do not edit manually.\n"
+    header = "// Auto-generated from datasets/*.json -- do not edit manually.\n"
     data_block = f"const datasets = {json.dumps(entries, indent=2, ensure_ascii=False)};\n\n"
 
     render_logic = """\
