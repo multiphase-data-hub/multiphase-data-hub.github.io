@@ -68,29 +68,6 @@ const datasets = [
     "imageUrl": "assets/hit_droplet_breakup_3d.png",
     "dataUrl": "https://modelscope.cn/datasets/yangqianqi/dns-droplet-breakup-hit-we15",
     "detailUrl": "dataset-test_submit_dataset2.html"
-  },
-  {
-    "id": "test_submit_dataset2",
-    "title": "TEST2",
-    "summary": "Direct numerical simulation data of a liquid droplet breaking up in forced homogeneous isotropic turbulence at Weber number 15. The dataset provides volume-fraction, pressure, and velocity fields over 81 snapshots.",
-    "status": "seed",
-    "modality": "simulation",
-    "physics": [
-      "two phase flow",
-      "VOF",
-      "droplet breakup in homogeneous isotropic turbulence"
-    ],
-    "tasks": [
-      "interface dynamics",
-      "flow-field learning"
-    ],
-    "samples": "81 snapshots",
-    "resolution": "256^3 cells",
-    "format": "custom binary",
-    "license": "CC-BY-4.0",
-    "imageUrl": "assets/hit_droplet_breakup_3d.png",
-    "dataUrl": "https://modelscope.cn/datasets/yangqianqi/dns-droplet-breakup-hit-we15",
-    "detailUrl": "dataset-test_submit_dataset2.html"
   }
 ];
 
