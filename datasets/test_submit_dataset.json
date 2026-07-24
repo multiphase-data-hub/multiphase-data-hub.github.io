@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1.0",
   "id": "test_submit_dataset",
-  "title": "Droplet breakup in HIT",
+  "title": "TEST",
   "version": "1.0.0",
   "status": "seed_dataset",
   "description": "Direct numerical simulation data of a liquid droplet breaking up in forced homogeneous isotropic turbulence at Weber number 15. The dataset provides volume-fraction, pressure, and velocity fields over 81 snapshots.",
