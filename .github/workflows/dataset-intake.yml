@@ -55,14 +55,15 @@ jobs:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout PR branch
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
+          fetch-depth: 0
+          persist-credentials: true
 
       - name: Validate dataset metadata
         run: python scripts/validate_dataset_metadata.py
-
       - name: Auto-generate stale files
         run: |
           python scripts/generate_datasets_js.py
@@ -72,7 +73,7 @@ jobs:
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add website/datasets.js website/dataset-*.html
             git commit -m "chore: auto-generate datasets.js and detail pages [skip ci]"
-            git push
+            git push origin HEAD:${{ github.head_ref }}
           fi
 
   notify-reviewers:
