@@ -78,7 +78,7 @@ jobs:
 
   notify-reviewers:
     name: Notify reviewers
-    if: always() && (github.event_name == 'pull_request' || (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'dataset-submission')))
+    if: always() && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     needs: [issue-precheck, metadata-validation]
     steps:

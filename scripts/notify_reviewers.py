@@ -116,14 +116,15 @@ def main() -> int:
     message["From"] = mail_from
     message["To"] = ", ".join(recipients)
     message.set_content(body)
-
-    with smtplib.SMTP(smtp_host, port, timeout=30) as smtp:
-        smtp.starttls()
-        if username and password:
-            smtp.login(username, password)
-        smtp.send_message(message)
-
-    write_summary(subject, body, recipients, "email sent")
+    try:
+        with smtplib.SMTP(smtp_host, port, timeout=30) as smtp:
+            smtp.starttls()
+            if username and password:
+                smtp.login(username, password)
+            smtp.send_message(message)
+        write_summary(subject, body, recipients, "email sent")
+    except Exception as exc:
+        write_summary(subject, body, recipients, f"SMTP failed: {exc}")
     return 0
 
 
