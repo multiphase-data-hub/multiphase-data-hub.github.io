@@ -21,11 +21,12 @@
       </nav>
       <div class="page-title">
         <p class="eyebrow">Contribute</p>
-        <h1>Submit a dataset record, not the data files themselves.</h1>
+        <h1>Submit a dataset record for automated precheck and maintainer review.</h1>
         <p>
           Contributors host large files on ModelScope, Kaggle, Zenodo, or
-          institutional storage. This catalogue reviews and publishes metadata,
-          access links, documentation, and citation information.
+          institutional storage. The catalogue uses a BLASTNet-style intake
+          model: automated checks catch basic metadata problems, then maintainers
+          decide whether the dataset is ready to publish.
         </p>
       </div>
     </header>
@@ -45,18 +46,23 @@
           </article>
           <article>
             <span>3</span>
-            <h3>Submit the Record</h3>
-            <p>Open a GitHub issue or pull request with the dataset title, description, preview image, landing page, license, citation, and key metadata.</p>
+            <h3>Request Review</h3>
+            <p>Open a GitHub issue or pull request with the dataset title, description, preview image, landing page, license, citation, review track, and key metadata.</p>
+          </article>
+          <article>
+            <span>4</span>
+            <h3>Precheck and Review</h3>
+            <p>Automation labels the request, validates catalogue metadata in pull requests, and emails reviewers when SMTP secrets are configured. Maintainers complete the final review.</p>
           </article>
         </div>
         <div class="download-actions">
-          <a class="button primary" href="https://github.com/multiphase-data-hub/multiphase-data-hub.github.io/issues/new?template=dataset_submission.yml">Open a Dataset Submission Issue</a>
-          <a class="button outline" href="https://github.com/multiphase-data-hub/multiphase-data-hub.github.io/pulls">Submit a Pull Request</a>
+          <a class="button primary" href="https://github.com/yang226159802/multiphase-data-hub.github.io/issues/new?template=dataset_submission.yml">Open a Dataset Submission Issue</a>
+          <a class="button outline" href="https://github.com/yang226159802/multiphase-data-hub.github.io/issues/new?template=dataset_submission.yml">Submit a Pull Request</a>
         </div>
       </section>
 
       <section class="section band">
-        <p class="eyebrow">Before Submission</p>
+        <p class="eyebrow">Before Review</p>
         <h2>Minimum checklist for a new record</h2>
         <ul class="checklist">
           <li>Data are hosted outside this website repository.</li>
@@ -67,10 +73,34 @@
           <li>Custom binary files include header size, dtype, payload shape, component order, reshape order, and <code>load_example.py</code>.</li>
           <li>License, contributors, contact, and DOI or preferred citation are explicit.</li>
           <li>At least one representative preview image is provided for the catalogue page.</li>
+          <li>The submitter understands that automated checks are preliminary and maintainers make the final inclusion decision.</li>
         </ul>
       </section>
 
       <section class="section">
+        <p class="eyebrow">Automated Intake</p>
+        <h2>The first pass checks structure, not scientific quality.</h2>
+        <div class="detail-grid">
+          <article class="detail-card">
+            <h3>Issue Triage</h3>
+            <p>Dataset submission issues receive intake labels and an automated comment so maintainers can track new requests quickly.</p>
+          </article>
+          <article class="detail-card">
+            <h3>Metadata Validation</h3>
+            <p>Pull requests run a lightweight check over <code>datasets/*.json</code> for required catalogue fields, access links, format information, and domain metadata.</p>
+          </article>
+          <article class="detail-card">
+            <h3>Email Reminder</h3>
+            <p>When repository SMTP secrets and reviewer emails are configured, new requests trigger an email reminder with the issue or pull request link.</p>
+          </article>
+          <article class="detail-card">
+            <h3>Human Decision</h3>
+            <p>Maintainers still review license clarity, citation, physical description, file readability, and whether the record fits the catalogue scope.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section band">
         <p class="eyebrow">What to Send</p>
         <h2>The catalogue record should be short and verifiable.</h2>
         <div class="detail-grid">
