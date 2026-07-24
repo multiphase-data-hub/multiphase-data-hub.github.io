@@ -1,6 +1,8 @@
 name: Dataset intake
-
 on:
+  push:
+    paths:
+      - 'datasets/**.json'
   issues:
     types: [opened, edited, reopened]
   pull_request:
@@ -52,7 +54,7 @@ jobs:
 
   metadata-validation:
     name: Metadata validation
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -73,7 +75,7 @@ jobs:
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add website/datasets.js website/dataset-*.html
             git commit -m "chore: auto-generate datasets.js and detail pages [skip ci]"
-            git push origin HEAD:${{ github.head_ref }}
+             if [ -n "${{ github.head_ref }}" ]; then git push origin HEAD:${{ github.head_ref }}; else git push; fi
           fi
 
   notify-reviewers:
