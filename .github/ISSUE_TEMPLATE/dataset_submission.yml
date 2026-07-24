@@ -3,11 +3,15 @@ description: Propose a dataset record for Multiphase Data Hub
 title: "[Dataset] "
 labels:
   - dataset-submission
+  - automated-precheck
+  - needs-human-review
 body:
   - type: markdown
     attributes:
       value: |
         Thank you for proposing a dataset. Please host the large data files on ModelScope, Kaggle, Zenodo, or institutional storage first. This GitHub issue is for submitting the catalogue record, preview information, and access links.
+
+        After submission, an automated precheck labels the issue and notifies maintainers. A maintainer still performs the final review before the dataset appears in the catalogue.
 
   - type: input
     id: title
@@ -41,6 +45,19 @@ body:
     validations:
       required: true
 
+  - type: dropdown
+    id: requested_track
+    attributes:
+      label: Requested review track
+      description: Choose the closest BLASTNet-style intake track for this record.
+      options:
+        - Catalogue record
+        - Benchmark candidate
+        - Dataset mirror
+        - Metadata correction
+    validations:
+      required: true
+
   - type: input
     id: access_link
     attributes:
@@ -49,6 +66,15 @@ body:
       placeholder: https://modelscope.cn/datasets/owner/dataset-name
     validations:
       required: true
+
+  - type: input
+    id: metadata_link
+    attributes:
+      label: Metadata file link
+      description: Link to the hosted info.json or multiphase_info.json, if already public.
+      placeholder: https://.../multiphase_info.json
+    validations:
+      required: false
 
   - type: input
     id: contributors
@@ -125,6 +151,18 @@ body:
     validations:
       required: true
 
+  - type: textarea
+    id: automation_notes
+    attributes:
+      label: Automated precheck notes
+      description: List anything the automated reviewer should know, such as temporary access restrictions, large-file mirrors, or a sample file path.
+      placeholder: |
+        Sample file for load test:
+        Checksums file:
+        Access restriction, if any:
+    validations:
+      required: false
+
   - type: input
     id: doi
     attributes:
@@ -164,4 +202,6 @@ body:
         - label: Variables, grid, file format, license, and citation are documented.
           required: true
         - label: A representative preview image is attached or linked.
+          required: true
+        - label: I understand that automated checks are preliminary and that maintainers make the final inclusion decision.
           required: true

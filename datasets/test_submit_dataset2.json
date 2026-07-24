@@ -1,0 +1,78 @@
+{
+  "schema_version": "0.1.0",
+  "id": "test_submit_dataset2",
+  "title": "TEST2",
+  "version": "1.0.0",
+  "status": "seed_dataset",
+  "description": "Direct numerical simulation data of a liquid droplet breaking up in forced homogeneous isotropic turbulence at Weber number 15. The dataset provides volume-fraction, pressure, and velocity fields over 81 snapshots.",
+  "domain": {
+    "field": "multiphase_flow",
+    "flow_type": "two_phase_flow",
+    "configuration": "droplet breakup in homogeneous isotropic turbulence",
+    "phases": ["liquid", "gas"],
+    "interface_method": "VOF",
+    "spatial_dimension": 3
+  },
+  "data": {
+    "primary_host": "ModelScope",
+    "modelscope_url": "https://modelscope.cn/datasets/yangqianqi/dns-droplet-breakup-hit-we15",
+    "kaggle_url": "TBD",
+    "doi": "TBD",
+    "format": "custom binary",
+    "case_file": null,
+    "geometry_file": null,
+    "grid": {
+      "cell_shape": [256, 256, 256],
+      "point_shape": [257, 257, 257],
+      "domain_bounds_xyz": [-3.1415998935699463, 3.1415998935699463, -3.1415998935699463, 3.1415998935699463, -3.1415998935699463, 3.1415998935699463]
+    },
+    "snapshot_selection": {
+      "source_snapshots": 81,
+      "selected_snapshots": 81,
+      "rule": "snapshots 000001 through 000081"
+    },
+    "variables": [
+      {
+        "name": "Gvol",
+        "role": "phase_indicator",
+        "type": "scalar field",
+        "units": "1",
+        "notes": "Volume fraction / phase indicator."
+      },
+      {
+        "name": "P",
+        "role": "pressure",
+        "type": "scalar field",
+        "units": "TBD"
+      },
+      {
+        "name": "V",
+        "role": "velocity",
+        "type": "vector field",
+        "units": "TBD"
+      }
+    ],
+    "binary_layout": {
+      "header_bytes": 244,
+      "dtype": "little-endian float32",
+      "cell_shape": [256, 256, 256],
+      "scalar_shape": [256, 256, 256],
+      "velocity_shape": [3, 256, 256, 256],
+      "reshape_order": "C"
+    }
+  },
+  "visuals": {
+    "main": "website/assets/hit_droplet_breakup_3d.png",
+    "initial_condition": "website/assets/hit_initial_droplet.png"
+  },
+  "license": {
+    "data_license": "CC-BY-4.0",
+    "usage_notes": "Reuse should cite the related publication and dataset landing page."
+  },
+  "citation": {
+    "preferred_citation": "Shao, C., Luo, K., Yang, Y., & Fan, J. DNS of droplet breakup in HIT (We = 15). Related article DOI: 10.1016/j.ijmultiphaseflow.2018.06.009.",
+    "related_paper_doi": "10.1016/j.ijmultiphaseflow.2018.06.009",
+    "authors": ["Changxiao Shao", "Kun Luo", "Yue Yang", "Jianren Fan"],
+    "contact": "TBD"
+  }
+}

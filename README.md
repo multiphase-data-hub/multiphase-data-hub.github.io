@@ -101,9 +101,38 @@ The first version deliberately uses the smallest possible toolchain:
   archives.
 - JSON metadata files: describe datasets in a machine-readable way.
 - Optional Python scripts: provide minimal data loaders and validation helpers.
+- GitHub Actions: runs automated intake checks and optionally emails reviewers
+  when SMTP secrets are configured.
 
 No backend server, database, login system, or paid cloud service is required for
 the initial release.
+
+
+## Dataset Intake and Review
+
+The contribution flow follows a BLASTNet-style split between automated intake
+and human review:
+
+1. Contributors host large files outside this repository.
+2. Contributors open a dataset submission issue or pull request.
+3. GitHub Actions labels dataset issues, validates `datasets/*.json` in pull
+   requests, and runs the reviewer notification script.
+4. If repository SMTP secrets are configured, reviewers listed in
+   `.github/reviewers.yml` receive an email reminder.
+5. Maintainers make the final decision after checking metadata completeness,
+   access, license, citation, physical description, and file readability.
+
+To enable email reminders, configure these repository secrets:
+
+```text
+SMTP_HOST
+SMTP_PORT
+SMTP_USERNAME
+SMTP_PASSWORD
+MAIL_FROM
+```
+
+Then replace the placeholder reviewer emails in `.github/reviewers.yml`.
 
 ## Local Preview
 

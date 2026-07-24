@@ -21,34 +21,58 @@
       </nav>
       <div class="page-title">
         <p class="eyebrow">Governance</p>
-        <h1>Lightweight review for reusable data</h1>
+        <h1>Automated precheck, human acceptance</h1>
         <p>
           The catalogue does not certify scientific perfection. It checks that
-          datasets are understandable, citable, licensed, and practically usable.
+          datasets are understandable, citable, licensed, and practically usable,
+          using automation for routine checks and maintainers for final review.
         </p>
       </div>
     </header>
 
     <main>
       <section class="section">
+        <p class="eyebrow">Review Model</p>
+        <h2>Automation accelerates intake, but does not approve records.</h2>
+        <p class="section-copy">
+          The dataset workflow follows the practical pattern used by mature
+          scientific data portals such as BLASTNet: contributors provide a
+          standardized request, automated checks verify basic structure, and
+          maintainers decide whether the record is complete enough to publish.
+        </p>
+      </section>
+
+      <section class="section band">
         <div class="standard-list">
           <article>
-            <h3>Metadata Review</h3>
-            <p>Variables, units, grid, file paths, phase convention, and snapshot information must be clear.</p>
+            <h3>Automated Triage</h3>
+            <p>Submission issues receive intake labels and reviewer notifications so new requests are less likely to be missed.</p>
           </article>
           <article>
-            <h3>Access Review</h3>
-            <p>Download links must work, and hosted files must match the metadata record.</p>
+            <h3>Metadata Precheck</h3>
+            <p>Pull requests validate catalogue JSON records for required fields, access links, file format, and domain metadata.</p>
           </article>
           <article>
-            <h3>License Review</h3>
-            <p>The dataset must state how others may reuse, cite, and redistribute the files.</p>
+            <h3>Maintainer Review</h3>
+            <p>Reviewers verify variables, units, grid, phase convention, file paths, license, citation, and practical readability.</p>
           </article>
           <article>
-            <h3>Reproducibility Review</h3>
-            <p>Solver-specific binary files must include enough information for external users to read them.</p>
+            <h3>Publication Decision</h3>
+            <p>Maintainers mark accepted records as catalogue, community, benchmark, or archived after the automated and manual checks are resolved.</p>
           </article>
         </div>
+      </section>
+
+      <section class="section">
+        <p class="eyebrow">Human Checklist</p>
+        <h2>Maintainers review the parts automation cannot judge.</h2>
+        <ul class="checklist">
+          <li>Scientific scope matches multiphase-flow simulation, experiment, or AI-ready derived data.</li>
+          <li>Data access is public or restrictions are stated clearly.</li>
+          <li>License and citation terms are compatible with reuse.</li>
+          <li>Custom binary files include enough information to read at least one sample.</li>
+          <li>Benchmark submissions include stable splits, metrics, and baseline expectations.</li>
+        </ul>
       </section>
     </main>
 
