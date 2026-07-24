@@ -14,7 +14,7 @@ permissions:
 jobs:
   issue-precheck:
     name: Issue precheck
-    if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'dataset-submission')
+    if: github.event_name == 'issues'
     runs-on: ubuntu-latest
     steps:
       - name: Add review labels
